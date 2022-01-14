@@ -1,0 +1,26 @@
+name: nats
+root: .
+on_project_start: docker-compose --project-dir . up -d
+on_project_stop: docker rm -f saas-sub nats-box-saas hsbc-sub-1 hsbc-sub-2 nats-box-hsbc diageo-sub nats-box-diageo || true && docker-compose --project-dir . down && docker-compose --project-dir . rm -f
+startup_window: saas
+startup_pane: 1
+windows:
+  - saas:
+      layout: even-vertical
+      panes:
+        - docker run --network nats_saas --rm -it --name saas-sub --entrypoint nats synadia/nats-box sub -s "nats://saas-1:4222" "acme.project.nats.v1.>"
+        - docker run --network nats_saas --rm -it --name nats-box-saas synadia/nats-box
+        # nats pub -s "nats://saas-1" acme.project.nats.v1.hsbc.1.feature.create hello
+  - hsbc:
+      layout: even-vertical
+      startup_pane: 2
+      panes:
+        - docker run --network nats_hsbc --rm -it --name hsbc-sub-1 --entrypoint nats synadia/nats-box sub -s "nats://hsbc-1:4222" "acme.project.nats.v1.hsbc.1.>"
+        - docker run --network nats_hsbc --rm -it --name hsbc-sub-2 --entrypoint nats synadia/nats-box sub -s "nats://hsbc-3:4222" "acme.project.nats.v1.hsbc.2.>"
+        - docker run --network nats_hsbc --rm -it --name nats-box-hsbc synadia/nats-box
+  - diageo:
+      layout: even-vertical
+      startup_pane: 2
+      panes:
+        - docker run --network nats_diageo --rm -it --name diageo-sub --entrypoint nats synadia/nats-box sub -s "nats://diageo-1:4222" "acme.project.nats.v1.diageo.1.>"
+        - docker run --network nats_diageo --rm -it --name nats-box-diageo synadia/nats-box

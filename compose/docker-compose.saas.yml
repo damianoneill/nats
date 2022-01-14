@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  saas-1:
+    image: nats:alpine
+    command: --name saas-1 -c /config/saas/saas.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - saas
+  saas-2:
+    image: nats:alpine
+    command: --name saas-1 -c /config/saas/saas.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - saas
+  saas-3:
+    image: nats:alpine
+    command: --name saas-1 -c /config/saas/saas.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - saas
+
+# this creates a new network named saas_net
+networks:
+  saas: 

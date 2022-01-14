@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+  hsbc-1:
+    image: nats:alpine
+    command: --name hsbc-1 -c /config/hsbc-1/edge-leaf.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - hsbc
+      - saas
+  hsbc-2:
+    image: nats:alpine
+    command: --name hsbc-1 -c /config/hsbc-1/edge.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - hsbc
+  hsbc-3:
+    image: nats:alpine
+    command: --name hsbc-1 -c /config/hsbc-1/edge.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - hsbc
+  hsbc-4:
+    image: nats:alpine
+    command: --name hsbc-4 -c /config/hsbc-2/edge-leaf.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - hsbc
+      - saas
+  hsbc-5:
+    image: nats:alpine
+    command: --name hsbc-5 -c /config/hsbc-2/edge.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - hsbc
+  hsbc-6:
+    image: nats:alpine
+    command: --name hsbc-6 -c /config/hsbc-2/edge.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - hsbc
+
+# this creates a new network named hsbc_net
+networks:
+  hsbc: 

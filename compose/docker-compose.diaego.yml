@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  diageo-1:
+    image: nats:alpine
+    command: --name diageo-1 -c /config/diageo/edge-leaf.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - diageo
+      - saas
+  diageo-2:
+    image: nats:alpine
+    command: --name diageo-1 -c /config/diageo/edge.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - diageo
+  diageo-3:
+    image: nats:alpine
+    command: --name diageo-1 -c /config/diageo/edge.conf
+    restart: always
+    volumes:
+      - ./config:/config
+    networks:
+      - diageo
+
+# this creates a new network named diageo_net
+networks:
+  diageo: 
