@@ -1,0 +1,11 @@
+FROM synadia/nats-box:0.6.0
+
+RUN wget -q -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 && \
+    chmod +x mkcert && \
+    mv mkcert /usr/bin/mkcert
+
+ENV CAROOT /config/certs/ca
+
+COPY config/certs/ca /config/certs/ca
+
+RUN mkcert -install

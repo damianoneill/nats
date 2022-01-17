@@ -2,7 +2,8 @@ version: "3.7"
 
 services:
   diageo-1:
-    image: nats:alpine
+    image: local/nats:alpine
+    container_name: diageo-1
     command: --name diageo-1 -c /config/diageo/edge-leaf.conf
     restart: always
     volumes:
@@ -11,16 +12,18 @@ services:
       - diageo
       - saas
   diageo-2:
-    image: nats:alpine
-    command: --name diageo-1 -c /config/diageo/edge.conf
+    image: local/nats:alpine
+    container_name: diageo-2
+    command: --name diageo-2 -c /config/diageo/edge.conf
     restart: always
     volumes:
       - ./config:/config
     networks:
       - diageo
   diageo-3:
-    image: nats:alpine
-    command: --name diageo-1 -c /config/diageo/edge.conf
+    image: local/nats:alpine
+    container_name: diageo-3
+    command: --name diageo-3 -c /config/diageo/edge.conf
     restart: always
     volumes:
       - ./config:/config

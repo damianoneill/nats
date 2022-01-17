@@ -1,0 +1,5 @@
+FROM nats:alpine
+
+RUN wget -q -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 && \
+    chmod +x mkcert && \
+    mv mkcert /usr/bin/mkcert

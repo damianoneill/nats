@@ -2,24 +2,40 @@ version: "3.7"
 
 services:
   saas-1:
-    image: nats:alpine
-    command: --name saas-1 -c /config/saas/saas.conf
+    image: local/nats:alpine
+    container_name: saas-1
+    command: >
+      ash -c "mkdir -p /config/certs/saas 
+      && CAROOT=/config/certs/ca mkcert -cert-file /config/certs/saas/saas-1-server-cert.pem -key-file /config/certs/saas/saas-1-server-key.pem saas-1
+      && nats-server --name saas-1 -c /config/saas/saas.conf --tls --tlscert=/config/certs/saas/saas-1-server-cert.pem --tlskey=/config/certs/saas/saas-1-server-key.pem"
     restart: always
+    ports:
+      - "8222:8222" # is an HTTP management port for information reporting
+      - "6222:6222" # is a routing port for clustering
+      - "4222:4222" # is for clients
     volumes:
       - ./config:/config
     networks:
       - saas
   saas-2:
-    image: nats:alpine
-    command: --name saas-1 -c /config/saas/saas.conf
+    image: local/nats:alpine
+    container_name: saas-2
+    command: >
+      ash -c "mkdir -p /config/certs/saas 
+      && CAROOT=/config/certs/ca mkcert -cert-file /config/certs/saas/saas-2-server-cert.pem -key-file /config/certs/saas/saas-2-server-key.pem saas-2 
+      && nats-server --name saas-2 -c /config/saas/saas.conf --tls --tlscert=/config/certs/saas/saas-2-server-cert.pem --tlskey=/config/certs/saas/saas-2-server-key.pem"
     restart: always
     volumes:
       - ./config:/config
     networks:
       - saas
   saas-3:
-    image: nats:alpine
-    command: --name saas-1 -c /config/saas/saas.conf
+    image: local/nats:alpine
+    container_name: saas-3
+    command: >
+      ash -c "mkdir -p /config/certs/saas 
+      && CAROOT=/config/certs/ca mkcert -cert-file /config/certs/saas/saas-3-server-cert.pem -key-file /config/certs/saas/saas-3-server-key.pem saas-3 
+      && nats-server --name saas-3 -c /config/saas/saas.conf --tls --tlscert=/config/certs/saas/saas-3-server-cert.pem --tlskey=/config/certs/saas/saas-3-server-key.pem"
     restart: always
     volumes:
       - ./config:/config
