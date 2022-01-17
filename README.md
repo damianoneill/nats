@@ -6,7 +6,7 @@
 - [Docker Compose](https://docs.docker.com/compose/)
 - Tmuxinator
 
-The solution uses TLS to encrypt/authenticate, see [this document](./TSL.md) for details.  If you plan to interact externally with the docker containers (through exposed ports), read this document to understand how to do this.
+The solution uses TLS to encrypt/authenticate, see [this document](./TLS.md) for details.  If you plan to interact externally with the docker containers (through exposed ports), read this document to understand how to do this.
 
 ## usage
 
