@@ -7,7 +7,7 @@ nats.io describes the TLS process in the following documents:
 
 The self signing process used in this playground uses [mkcert](https://github.dev/FiloSottile/mkcert) a BSD-3 tool for making locally-trusted development certificates.
 
-I've defined a [Dockerfile](./compose/Dockerfile) that extends the nats:alpine and installs mkcert so that it can be used to create the appropriate infrastructure inside each of the running containers.
+I've defined a [Dockerfile](./compose/Dockerfile.nats) that extends the nats:alpine and installs mkcert so that it can be used to create the appropriate infrastructure inside each of the running containers.
 
 ## usage
 
