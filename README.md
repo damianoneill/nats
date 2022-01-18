@@ -16,7 +16,7 @@ nats.io provides support natively for this type of deployment, its describes usi
 
 - Docker
 - [Docker Compose](https://docs.docker.com/compose/)
-- Tmuxinator
+- [Tmuxinator](https://github.com/tmuxinator/tmuxinator)
 
 The solution uses TLS to encrypt the traffic, see [this document](./TLS.md) for details. If you plan to interact externally with the docker containers (through exposed ports), read this document to understand how to do this.
 
