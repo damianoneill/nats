@@ -8,7 +8,7 @@ Two other docker networks are defined to represent two separate organisations co
 
 The diaego network like the SaaS network has a 3 node nats.io server cluster.
 
-The hsbc network contains two 3 node nats.io server cluster, both clusters run in the same network. This configuration simulates an environment where each nats server is servicing a subset of the total nats publisher / subscriber within an organisation.
+The hsbc network contains two 3 node nats.io server clusters, both clusters run in the same network. This configuration simulates an environment where each nats server is servicing a subset of the total nats publisher / subscriber within an organisation.
 
 nats.io provides support natively for this type of deployment, its describes using the term leaf, further information is available in this article -- https://docs.nats.io/running-a-nats-service/configuration/leafnodes
 
